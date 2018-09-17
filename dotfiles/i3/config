@@ -1,0 +1,327 @@
+#!/usr/bin/env bash
+
+
+# ------
+# Global config
+# ---
+
+# Font
+font pango:Noto Sans 9
+
+# use Mouse+Mod4 to drag floating windows to their wanted position
+floating_modifier Mod4
+
+# Do not focus with mouse hover
+focus_follows_mouse no
+
+# Do not change mouse position
+mouse_warping none
+
+
+# ------
+# Keys
+# ---
+set $key_tild 49
+set $key_q 24
+set $key_w 25
+set $key_e 26
+set $key_r 27
+set $key_t 28
+set $key_y 29
+set $key_u 30
+set $key_i 31
+set $key_o 32
+set $key_p 33
+set $eq 21
+
+set $key_a 38
+set $key_s 39
+set $key_d 40
+set $key_f 41
+set $key_g 42
+set $key_h 43
+set $key_j 44
+set $key_k 45
+set $key_l 46
+set $key_col 47
+set $key_quo 48
+
+set $key_z 52
+set $key_x 53
+set $key_c 54
+set $key_v 55
+set $key_b 56
+set $key_n 57
+set $key_m 58
+set $key_com 59
+set $key_dot 60
+set $slash 61
+
+set $bcksp 22
+set $esc 9
+set $space 65
+set $enter 36
+set $bracket_open 34
+set $bracket_closed 35
+
+# ---
+
+
+# ------
+# Colors
+# ---
+
+# Dark
+set $bg "#313233"
+set $fg "#fafafa"
+set $fg_ "#cacaca"
+set $fg__ "#969696"
+
+set $act_fg "#24f583"
+set $act_bg "#21D96E"
+set $urg_fg "#F03434"
+set $urg_bg "#E63131"
+
+# Light
+# set $bg "#f5f6f7"
+# set $fg "#656565"
+# set $fg_ "#cacaca"
+# set $fg__ "#969696"
+
+# set $act_fg "#158EEB"
+# set $act_bg "#1492F1"
+# set $urg_fg "#F03434"
+# set $urg_bg "#E63131"
+
+# ---
+
+# Change keybaord layout
+bindcode Mod4+$bracket_open exec "setxkbmap -layout 'us, ru'"; exec "sh -c 'sleep 0.1; exec pkill -RTMIN+1 i3blocks'"
+bindcode Mod4+$bracket_closed exec "setxkbmap -layout 'ru, us'"; exec "sh -c 'sleep 0.1; exec pkill -RTMIN+1 i3blocks'"
+
+# Deadbeef
+bindcode Mod4+Shift+$key_y exec --no-startup-id deadbeef --play; exec pkill -RTMIN+2 i3blocks
+bindcode Mod4+Shift+$key_u exec --no-startup-id deadbeef --prev; exec pkill -RTMIN+2 i3blocks
+bindcode Mod4+Shift+$key_i exec --no-startup-id deadbeef --toggle-pause; exec pkill -RTMIN+2 i3blocks
+bindcode Mod4+Shift+$key_o exec --no-startup-id deadbeef --next; exec pkill -RTMIN+2 i3blocks
+
+# Telegram
+bindcode Mod4+Shift+$key_t exec --no-startup-id FONTCONFIG_FILE=[_HOME_]/Apps/Telegram/fontfix telegram; workspace 11: 
+
+# Files
+bindcode Mod4+Shift+$key_r workspace 5: ; exec --no-startup-id [ $(ps h -C ranger | wc -l) = 0 ] && alacritty -e ranger
+
+# Screenshots
+bindcode Mod4+$key_tild exec cd ~; exec scrot 'screenshot-%Y.%m.%d-%H.%M.%S.jpg' -q 98 -u
+bindcode Mod4+Mod1+$key_tild exec cd ~; exec scrot 'screenshot-%Y.%m.%d-%H.%M.%S.png' -u
+bindcode Mod4+Shift+$key_tild exec cd ~; exec scrot 'screenshot-%Y.%m.%d-%H.%M.%S.jpg' -q 98
+# ffmpeg -f x11grab -video_size 1366x768 -framerate 30 -i :0.0+0,0 -c:v libx264 -preset ultrafast cast.mkv
+# ffmpeg -f x11grab -video_size 1680x1050 -framerate 30 -i :0.0+1366,0 -c:v libx264 -preset ultrafast cast.mkv
+
+# Start terminal
+bindsym Mod4+Return exec alacritty -e tmux
+
+# Kill focused window
+bindcode Mod4+Shift+$key_w kill
+
+# Restart i3 / Logout / Sleep / Turn Off
+bindcode Mod4+$bcksp restart
+bindcode Mod4+Shift+$bcksp exit
+bindcode Mod4+Control+$bcksp exec --no-startup-id "systemctl suspend"
+bindcode Mod4+Control+Shift+$bcksp exec --no-startup-id "shutdown -h now"
+bindcode Mod4+Control+Mod1+$bcksp exec --no-startup-id "reboot"
+
+# Start dmenu
+# bindcode Mod4+$space exec dmenu_run -i -m 1 -fn 'SF Pro Display:pixelsize=13' -nb $bg -nf $fg -sf $bg -sb $act_bg -l 5
+bindcode Mod4+$space exec rofi -show
+
+# Change focus
+bindsym Mod4+Left focus left
+bindsym Mod4+Down focus down
+bindsym Mod4+Up focus up
+bindsym Mod4+Right focus right
+
+# Move focused window
+bindsym Mod4+Shift+Left move left
+bindsym Mod4+Shift+Down move down
+bindsym Mod4+Shift+Up move up
+bindsym Mod4+Shift+Right move right
+
+# Fullscreen mode for the focused container
+bindcode Mod4+Shift+$enter fullscreen toggle
+
+# Cntainer layout (stacked, tabbed, toggle split)
+bindcode Mod4+$slash layout tabbed
+bindcode Mod4+$key_u split h
+bindcode Mod4+$key_i layout toggle split
+bindcode Mod4+$key_o split v
+bindcode Mod4+$eq layout stacking
+
+# Toggle tiling / floating
+bindsym --whole-window button10 floating toggle
+bindcode Mod4+$key_e floating toggle
+bindcode Mod4+Shift+$key_e focus mode_toggle
+
+# Focus the parent container
+bindcode Mod4+$key_q focus parent
+
+# Scratchpad
+bindsym Mod4+Shift+minus move scratchpad
+bindsym Mod4+minus scratchpad show
+
+# Resize mode
+bindcode Mod4+$key_r mode "resize"
+
+# Bind workspaces to specific monitors
+workspace 1 output VGA1
+workspace 2 output VGA1
+workspace 3 output VGA1
+workspace 4 output VGA1
+workspace 5 output VGA1
+workspace 6 output VGA1
+workspace 7 output VGA1
+workspace 8 output VGA1
+
+workspace 9 output LVDS1
+workspace 10 output LVDS1
+workspace 11 output LVDS1
+workspace 12 output LVDS1
+workspace 13 output LVDS1
+workspace 14 output LVDS1
+
+# Switch to workspace
+bindcode Mod4+$key_h workspace 1: 
+bindcode Mod4+$key_j workspace 2: 
+bindcode Mod4+$key_k workspace 3: 
+bindcode Mod4+$key_l workspace 4: 
+bindcode Mod4+$key_col workspace 5: 
+bindcode Mod4+$key_n workspace 6: 
+bindcode Mod4+$key_m workspace 7: 
+bindcode Mod4+$key_com workspace 8: 
+
+bindcode Mod4+$key_a workspace 9: 
+bindcode Mod4+$key_s workspace 10: 
+bindcode Mod4+$key_d workspace 11: 
+bindcode Mod4+$key_f workspace 12: 
+bindcode Mod4+$key_z workspace 13: 
+bindcode Mod4+$key_x workspace 14: 
+
+# Move focused container to workspace
+bindcode Mod4+Shift+$key_h move container to workspace 1: ; workspace 1: 
+bindcode Mod4+Shift+$key_j move container to workspace 2: ; workspace 2: 
+bindcode Mod4+Shift+$key_k move container to workspace 3: ; workspace 3: 
+bindcode Mod4+Shift+$key_l move container to workspace 4: ; workspace 4: 
+bindcode Mod4+Shift+$key_col move container to workspace 5: ; workspace 5: 
+bindcode Mod4+Shift+$key_n move container to workspace 6: ; workspace 6: 
+bindcode Mod4+Shift+$key_m move container to workspace 7: ; workspace 7: 
+bindcode Mod4+Shift+$key_com move container to workspace 8: ; workspace 8: 
+
+bindcode Mod4+Shift+$key_a move container to workspace 9: ; workspace 9: 
+bindcode Mod4+Shift+$key_s move container to workspace 10: ; workspace 10: 
+bindcode Mod4+Shift+$key_d move container to workspace 11: ; workspace 11: 
+bindcode Mod4+Shift+$key_f move container to workspace 12: ; workspace 11: 
+bindcode Mod4+Shift+$key_z move container to workspace 13: ; workspace 13: 
+bindcode Mod4+Shift+$key_x move container to workspace 14: ; workspace 14: 
+
+# Apps assignments
+assign [class="(?i)firefox"] "1: "
+assign [class="(?i)qbittorrent"] "1: "
+for_window [class="(?i)qbittorrent"] focus
+assign [class="(?i)subl"] "2: "
+for_window [class="(?i)subl"] focus
+assign [class="(?i)code"] "3: "
+assign [class="(?i)mpv"] "6: "
+for_window [class="(?i)mpv"] focus
+assign [class="(?i)eog"] "6: "
+for_window [class="(?i)eog"] focus
+assign [class="(?i)evince"] "6: "
+for_window [class="(?i)evince"] focus
+assign [class="(?i)deadbeef"] "6: "
+for_window [class="(?i)qemu" title="(?i)windows10"] move to workspace "7: "
+for_window [class="(?i)qemu" title="(?i)macos"] move to workspace "8: "
+
+assign [class="(?i)chrome"] "10: "
+assign [class="(?i)arida"] "10: "
+assign [class="(?i)telegram"] "11: "
+for_window [class=".*"] title_format " %title"
+
+# Show titles
+# for_window [class=".*"] border normal 0
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+    bindsym Left        resize shrink width 15 px or 5 ppt
+    bindsym Down        resize grow height 15 px or 5 ppt
+    bindsym Up          resize shrink height 15 px or 5 ppt
+    bindsym Right       resize grow width 15 px or 5 ppt
+
+    bindsym Shift+Left  resize shrink width 5 px or 1 ppt
+    bindsym Shift+Down  resize grow height 5 px or 1 ppt
+    bindsym Shift+Up    resize shrink height 5 px or 1 ppt
+    bindsym Shift+Right resize grow width 5 px or 1 ppt
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+gaps inner 12
+smart_gaps on
+
+focus_on_window_activation none
+
+# hide_edge_borders both
+new_window none
+client.focused $bg $bg $act_fg $bg $bg
+client.focused_inactive $bg $bg $fg $bg $bg
+client.unfocused $bg $bg $fg__ $bg $bg
+client.urgent $bg $bg $urg_fg $bg $bg
+client.placeholder $bg $bg $fg__ $bg $bg
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+    i3bar_command i3bar
+    status_command i3blocks
+    position top
+    separator_symbol " "
+    tray_padding 4
+    strip_workspace_numbers yes
+
+    colors {
+       background $bg
+       focused_workspace $bg $bg $act_fg
+       active_workspace $bg $bg $fg_
+       inactive_workspace $bg $bg $fg__
+       urgent_workspace $bg $bg $urg_fg
+    }
+
+    font pango:Noto Sans, Font Awesome 5 Free 9
+}
+
+
+# Run bg apps and other stuff
+# exec --no-startup-id gnome-settings-daemon
+exec --no-startup-id feh --bg-fill [_HOME_]/.config/images/bg.jpg --bg-fill [_HOME_]/.config/images/wp6-n.jpg
+# feh --bg-scale --no-xinerama /path/img.png - one image on two screens
+# exec --no-startup-id nm-applet
+# exec --no-startup-id yandex-disk-indicator
+exec --no-startup-id FONTCONFIG_FILE=[_HOME_]/Apps/Telegram/fontfix telegram -startintray -- %u
+
+exec_always --no-startup-id xset r rate 250 32
+exec_always --no-startup-id xrandr --output LVDS1 --brightness 0.78
+exec --no-startup-id xset s off
+exec --no-startup-id xset -dpms
+exec --no-startup-id yandex-disk start
+exec --no-startup-id compton -b
+
+
+# Restore workspaces
+exec --no-startup-id i3-msg "workspace 9: ; append_layout [_HOME_]/.config/i3/workspace-alacritty.json"
+exec --no-startup-id alacritty -e tmux
+
+exec --no-startup-id i3-msg "workspace 2: ; append_layout [_HOME_]/.config/i3/workspace-subl.json"
+exec --no-startup-id subl
+
+exec --no-startup-id i3-msg "workspace 1: ; append_layout [_HOME_]/.config/i3/workspace-firefox.json"
+exec --no-startup-id ff

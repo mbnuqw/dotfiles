@@ -1,0 +1,16 @@
+{
+	"Debug_logs": {
+		"prefix": "out",
+		"body": [
+			"console.log('[DEBUG] $1');"
+		],
+		"description": "Log output to console"
+	},
+	"Gimme El by id": {
+		"prefix": "did",
+		"body": [
+			"document.getElementById($0)"
+		],
+		"description": "el by id"
+	}
+}

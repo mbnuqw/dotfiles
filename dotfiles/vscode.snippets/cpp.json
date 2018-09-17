@@ -1,0 +1,9 @@
+{
+	"Debug_logs": {
+		"prefix": "out",
+		"body": [
+			"std::cout << \"[DEBUG:$1] $2\" << std::endl;"
+		],
+		"description": "Log output to console"
+	}
+}

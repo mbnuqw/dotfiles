@@ -1,0 +1,59 @@
+[global]
+    monitor = 1
+
+    # Margin 8px
+    geometry = "480x5-16+38"
+    shrink = no
+    padding = 12
+    horizontal_padding = 12
+    separator_height = 2
+    separator_color = "#282828"
+
+    font = Noto Sans 9
+    format = "<span size='13000' rise='10000'>%s</span>\n<span rise='5000' fgcolor='#efefef'>%b</span>\n<span size='8000' fgcolor='#e9e9e9'>%a</span>"
+    word_wrap = yes
+    stack_duplicates = false
+    hide_duplicate_count = true
+    show_indicators = no
+    dmenu = /usr/bin/dmenu -p dunst:
+    icon_position = left
+    max_icon_size = 56
+
+    frame_width = 2
+    frame_color = "#282828"
+
+[shortcuts]
+    # shortcuts are specified as [modifier+][modifier+]...key
+    # available modifiers are 'ctrl', 'mod1' (the alt-key), 'mod2', 'mod3'
+    # and 'mod4' (windows-key)
+    # xev might be helpful to find names for keys
+
+    # close notification
+    close = mod4+t
+
+    # close all notifications
+    close_all = mod4+shift+t
+
+    # redisplay last message(s)
+    history = mod4+b
+
+    # context menu
+    #context = mod4+shift+i
+
+
+[urgency_low]
+    background = "#313233"
+    foreground = "#709BFF"
+    timeout = 15
+
+
+[urgency_normal]
+    background = "#313233"
+    foreground = "#21D96E"
+    timeout = 0
+
+
+[urgency_critical]
+    background = "#313233"
+    foreground = "#F03434"
+    timeout = 0

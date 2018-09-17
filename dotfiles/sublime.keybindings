@@ -1,0 +1,162 @@
+[
+  //  Cursor movements
+  // ---
+  // Left / Right
+  // { "keys": ["ctrl+j"], "command": "move", "args": {"by": "characters", "forward": false} },
+  // { "keys": ["ctrl+о"], "command": "move", "args": {"by": "characters", "forward": false} },
+  // { "keys": ["ctrl+l"], "command": "move", "args": {"by": "characters", "forward": true} },
+  // { "keys": ["ctrl+д"], "command": "move", "args": {"by": "characters", "forward": true} },
+  // Left / Right by subwords
+  // { "keys": ["ctrl+shift+j"], "command": "move", "args": {"by": "subwords", "forward": false} },
+  // { "keys": ["ctrl+shift+о"], "command": "move", "args": {"by": "subwords", "forward": false} },
+  // { "keys": ["ctrl+shift+l"], "command": "move", "args": {"by": "subword_ends", "forward": true} },
+  // { "keys": ["ctrl+shift+д"], "command": "move", "args": {"by": "subword_ends", "forward": true} },
+  // Up / Down
+  // { "keys": ["ctrl+i"], "command": "move", "args": {"by": "lines", "forward": false} },
+  // { "keys": ["ctrl+ш"], "command": "move", "args": {"by": "lines", "forward": false} },
+  // { "keys": ["ctrl+k"], "command": "move", "args": {"by": "lines", "forward": true} },
+  // { "keys": ["ctrl+л"], "command": "move", "args": {"by": "lines", "forward": true} },
+  // Start / End
+  // { "keys": ["ctrl+h"], "command": "move_to", "args": {"to": "bol", "extend": false} },
+  // { "keys": ["ctrl+р"], "command": "move_to", "args": {"to": "bol", "extend": false} },
+  // { "keys": ["ctrl+;"], "command": "move_to", "args": {"to": "eol", "extend": false} },
+  // { "keys": ["ctrl+ж"], "command": "move_to", "args": {"to": "eol", "extend": false} },
+  // Up / Down by screen
+  // { "keys": ["ctrl+u"], "command": "move", "args": {"by": "pages", "forward": false} },
+  // { "keys": ["ctrl+г"], "command": "move", "args": {"by": "pages", "forward": false} },
+  // { "keys": ["ctrl+o"], "command": "move", "args": {"by": "pages", "forward": true} },
+  // { "keys": ["ctrl+щ"], "command": "move", "args": {"by": "pages", "forward": true} },
+  // ---
+  //  Cursor movements with selection
+  // ---
+  // Left / Right
+  // { "keys": ["ctrl+shift+alt+j"], "command": "move",
+  //                                 "args": {"by": "characters", "forward": false, "extend": true} },
+  // { "keys": ["ctrl+shift+alt+о"], "command": "move",
+  //                                 "args": {"by": "characters", "forward": false, "extend": true} },
+  // { "keys": ["ctrl+shift+alt+l"], "command": "move",
+  //                                 "args": {"by": "characters", "forward": true, "extend": true} },
+  // { "keys": ["ctrl+shift+alt+д"], "command": "move",
+  //                                 "args": {"by": "characters", "forward": true, "extend": true} },
+  // Left / Right by subwords
+  // { "keys": ["ctrl+alt+j"], "command": "move",
+  //                           "args": {"by": "subwords", "forward": false, "extend": true} },
+  // { "keys": ["ctrl+alt+о"], "command": "move",
+  //                           "args": {"by": "subwords", "forward": false, "extend": true} },
+  // { "keys": ["ctrl+alt+l"], "command": "move",
+  //                           "args": {"by": "subword_ends", "forward": true, "extend": true} },
+  // { "keys": ["ctrl+alt+д"], "command": "move",
+  //                           "args": {"by": "subword_ends", "forward": true, "extend": true} },
+  // Up / Down
+  // { "keys": ["ctrl+alt+i"], "command": "move",
+  //                           "args": {"by": "lines", "forward": false, "extend": true} },
+  // { "keys": ["ctrl+alt+ш"], "command": "move",
+  //                           "args": {"by": "lines", "forward": false, "extend": true} },
+  // { "keys": ["ctrl+alt+k"], "command": "move",
+  //                           "args": {"by": "lines", "forward": true, "extend": true} },
+  // { "keys": ["ctrl+alt+л"], "command": "move",
+  //                           "args": {"by": "lines", "forward": true, "extend": true} },
+  // ---
+
+  // Start / End
+  // { "keys": ["ctrl+alt+h"], "command": "move_to", "args": {"to": "bol", "extend": true} },
+  // { "keys": ["ctrl+alt+р"], "command": "move_to", "args": {"to": "bol", "extend": true} },
+  // { "keys": ["ctrl+alt+;"], "command": "move_to", "args": {"to": "eol", "extend": true} },
+  // { "keys": ["ctrl+alt+ж"], "command": "move_to", "args": {"to": "eol", "extend": true} },
+
+  // Up / Down screen
+  // { "keys": ["shift+pageup"], "command": "move", 
+  //                             "args": {"by": "pages", "forward": false, "extend": true} },
+  // { "keys": ["shift+pagedown"], "command": "move",
+  //                               "args": {"by": "pages", "forward": true, "extend": true} },
+
+  // Line movements
+  // { "keys": ["ctrl+shift+i"], "command": "swap_line_up" },
+  // { "keys": ["ctrl+shift+ш"], "command": "swap_line_up" },
+  // { "keys": ["ctrl+shift+k"], "command": "swap_line_down" },
+  // { "keys": ["ctrl+shift+л"], "command": "swap_line_down" },
+
+  // Cyrillic bindings
+  { "keys": ["ctrl+ч"], "command": "cut" },
+  { "keys": ["ctrl+с"], "command": "copy" },
+  { "keys": ["ctrl+м"], "command": "paste" },
+
+  // Add cursors (ud/down)
+  { "keys": ["alt+up"], "command": "select_lines", "args": {"forward": false} },
+  { "keys": ["alt+down"], "command": "select_lines", "args": {"forward": true} },
+
+  //  Expand Region [plugin]
+  // { "keys": ["ctrl+w"], "command": "expand_region" },
+  // { "keys": ["ctrl+ц"], "command": "expand_region" },
+  // { "keys": ["ctrl+alt+w"], "command": "expand_region",
+  //                           "args": {"undo": true},
+  //                           "context": [{ "key": "expand_region_soft_undo" }] },
+  // { "keys": ["ctrl+alt+ц"], "command": "expand_region",
+  //                           "args": {"undo": true},
+  //                           "context": [{ "key": "expand_region_soft_undo" }] },
+
+  //  Paste from history
+  { "keys": ["ctrl+shift+v"], "command": "paste_from_history" },
+
+  //  Convert case
+  // { "keys": ["ctrl+s", "ctrl+u"], "command": "upper_case" },
+  // { "keys": ["ctrl+s", "ctrl+l"], "command": "lower_case" },
+
+  //  File operations
+  { "keys": ["ctrl+s"], "command": "save" },
+  { "keys": ["ctrl+ы"], "command": "save" },
+  { "keys": ["ctrl+alt+s"], "command": "save_all" },
+  { "keys": ["ctrl+alt+ы", "ctrl+alt+ф"], "command": "save_all" },
+  { "keys": ["ctrl+w"], "command": "close" },
+  { "keys": ["ctrl+ц"], "command": "close" },
+
+  //  SideBar
+  // { "keys": ["ctrl+s", "ctrl+b"], "command": "toggle_side_bar" },
+
+  // Find
+  {"keys": ["ctrl+f", "ctrl+f"], "command": "show_panel", "args": {"panel": "find", "reverse": false}},
+  {"keys": ["ctrl+f", "ctrl+r"], "command": "show_panel", "args": {"panel": "replace", "reverse": false}},
+
+  { "keys": ["ctrl+t"], "command": "show_panel", "args": {"panel": "console", "toggle": true} },
+
+  //  Misc
+  { "keys": ["ctrl+d"], "command": "duplicate_line" },
+  { "keys": ["alt+w"], "command": "find_under_expand" },
+
+  //  Build
+  { "keys": ["ctrl+b"], "command": "unbind" },
+  { "keys": ["ctrl+b", "ctrl+a"], "command": "build" },
+  { "keys": ["ctrl+b", "ctrl+s"], "command": "build", "args": {"select": true} },
+
+  //  Fast jump [plugin]
+  { "keys": ["alt+j"], "command": "fast_jump" },
+
+  //  Current date [plugin]
+  { "keys": ["alt+d"], "command": "current_date_full" },
+
+  // Plain Tasks [plugin]
+  { "keys": ["ctrl+t", "ctrl+y"], "command": "plain_tasks_complete","context": [{ "key": "selector", "operator": "equal", "operand": "text.todo" }] },
+  { "keys": ["ctrl+t", "ctrl+n"], "command": "plain_tasks_cancel", "context": [{"key": "selector", "operator": "equal", "operand": "text.todo" }] },
+  { "keys": ["ctrl+t", "ctrl+a"], "command": "plain_tasks_archive","context": [{ "key": "selector", "operator": "equal", "operand": "text.todo" }] },
+  { "keys": ["ctrl+t", "ctrl+o"], "command": "plain_tasks_archive_org","context": [{ "key": "selector", "operator": "equal", "operand": "text.todo" }] },
+  { "keys": ["ctrl+t", "ctrl+t"], "command": "plain_tasks_open_url","context": [{ "key": "selector", "operator": "equal", "operand": "text.todo" }] },
+
+  // Emmet [plugin]
+  {"keys": ["ctrl+e", "ctrl+f"], "args": {"action": "split_join_tag"}, "command": "run_emmet_action", "context": [{"key": "emmet_action_enabled.split_join_tag"}]}, 
+  {"keys": ["ctrl+e", "ctrl+e"], "args": {"action": "expand_abbreviation"}, "command": "run_emmet_action", "context": [{"key": "emmet_action_enabled.expand_abbreviation"}]},
+
+  // PX to EM [plugin]
+  // {"keys": ["ctrl+s", "ctrl+e"], "command": "px_to_em"},
+
+  // JsPrettier [plugin]
+  // {"keys": ["ctrl+s", "ctrl+p"], "command": "js_prettier"},
+
+  { "keys": ["ctrl+shift+["], "command": "unfold" },
+
+  { "keys": ["alt+;"], "command": "postfix" },
+
+  { "keys": ["alt+q"], "command": "unbind" },
+
+  // Typescript
+  { "keys": ["alt+t"], "command": "typescript_quick_info_doc", "context": [{ "key": "selector", "operator": "equal", "operand": "source.ts, source.tsx, text.html.vue" }]}
+]

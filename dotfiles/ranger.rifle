@@ -1,0 +1,21 @@
+ext flac = deadbeef "$@" &
+ext mp3 = deadbeef "$@" &
+ext m4a = deadbeef "$@" &
+
+ext jpg = eog "$@" &
+ext jpeg = eog "$@" &
+ext gif = eog "$@" &
+ext png = eog "$@" &
+
+ext pdf = evince "$@" &
+
+ext mkv = mpv --really-quiet -- "$@" &
+ext mp4 = mpv --really-quiet -- "$@" &
+ext m4v = mpv --really-quiet -- "$@" &
+ext avi = mpv --really-quiet -- "$@" &
+ext webm = mpv --really-quiet -- "$@" &
+
+label editor = subl -- "$@"
+label pager = less -- "$@"
+label music = deadbeef -- "$@"
+label code = code -- "$@"

@@ -1,0 +1,80 @@
+#!/usr/bin/env python3
+
+import re
+import math
+import sys
+import datetime
+import time
+from subprocess import run, PIPE
+
+TASKS_PATH = "[_HOME_]/Sync/notes/global.todo"
+
+with open(TASKS_PATH) as f:
+    tasks = f.read()
+
+active = None
+start_time = None
+end_time = None
+
+task_color = "#24f583"
+done_color = "#24f583"
+warn_color = "#E87805"
+err_color = "#DE0B0B"
+
+# task_color = "#656565"
+# done_color = "#656565"
+# warn_color = "#323232"
+# err_color = "#121212"
+
+for line in iter(tasks.splitlines()):
+    if "→" not in line:
+        continue
+    
+    task = line.replace("→", "").strip()
+
+    if "@started(" in task:
+        task_match = re.match(r"(.+)\s@started\((\d\d)-(\d\d)-(\d\d) (\d\d):(\d\d)\)", task)
+        active = task_match.group(1)
+        sy = int("20" + task_match.group(2))
+        sm = int(task_match.group(3))
+        sd = int(task_match.group(4))
+        shr = int(task_match.group(5))
+        smin = int(task_match.group(6))
+        start_time = datetime.datetime(sy, sm, sd, shr, smin).timestamp()
+
+        if "@due(" in task:
+            due_match = re.match(r".+@due\((\d\d)-(\d\d)-(\d\d) (\d\d):(\d\d)\)", task)
+            ey = int("20" + due_match.group(1))
+            em = int(due_match.group(2))
+            ed = int(due_match.group(3))
+            ehr = int(due_match.group(4))
+            emin = int(due_match.group(5))
+            end_time = datetime.datetime(ey, em, ed, ehr, emin).timestamp()
+        break
+    elif "@started" in task:
+        active = re.sub(r" @started", '', task)
+        break
+
+if not active:
+    exit()
+
+if start_time != None and end_time != None and end_time > start_time:
+    str_len = len(active)
+    task_len = end_time - start_time
+    task_spend = time.time() - start_time
+    progress = math.ceil(str_len / task_len * task_spend)
+    reprogress = str_len - progress
+    tc = task_color
+    if progress < str_len * 0.7:
+        undc = done_color
+    elif progress < str_len:
+        undc = warn_color
+    else:
+        undc = err_color
+        tc = err_color
+    start = active[:progress].replace("&", "&amp;")
+    end = "" if reprogress <= 0 else active[-reprogress:].replace("&", "&amp;")
+    print("<span underline=\"single\" underline_color=\"" + undc + "\" foreground=\"" + tc + "\">" + start + "</span><span foreground=\"" + tc + "\">" + end + "</span>")
+
+else:
+    print("<span foreground=\"" + task_color + "\">" + active + "</span>")

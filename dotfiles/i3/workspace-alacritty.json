@@ -1,0 +1,13 @@
+{
+  "border": "none",
+  "current_border_width": 0,
+  "floating": "auto_off",
+  "name": "cli",
+  "percent": 1,
+  "swallows": [
+    {
+      "class": "(?i)alacritty"
+    }
+  ],
+  "type": "con"
+}
