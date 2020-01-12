@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 import re
 import math
@@ -12,22 +12,27 @@ TASKS_PATH = "[_HOME_]/Sync/notes/global.todo"
 with open(TASKS_PATH) as f:
     tasks = f.read()
 
+parent_task = ""
 active = None
 start_time = None
 end_time = None
 
-task_color = "#24f583"
+task_color = "#ffffff"
 done_color = "#24f583"
 warn_color = "#E87805"
 err_color = "#DE0B0B"
 
-# task_color = "#656565"
-# done_color = "#656565"
-# warn_color = "#323232"
-# err_color = "#121212"
+def normalize(input):
+    input = input.replace("<", "\uFF1C")
+    input = input.replace(">", "\uFF1E")
+    input = input.replace("&", " and ")
+    return input
 
 for line in iter(tasks.splitlines()):
     if "→" not in line:
+        p_match = re.match(r"^\s(.+):$", line)
+        if p_match:
+            parent_task = p_match.group(1)
         continue
     
     task = line.replace("→", "").strip()
@@ -35,6 +40,7 @@ for line in iter(tasks.splitlines()):
     if "@started(" in task:
         task_match = re.match(r"(.+)\s@started\((\d\d)-(\d\d)-(\d\d) (\d\d):(\d\d)\)", task)
         active = task_match.group(1)
+        active = normalize(active)
         sy = int("20" + task_match.group(2))
         sm = int(task_match.group(3))
         sd = int(task_match.group(4))
@@ -53,6 +59,7 @@ for line in iter(tasks.splitlines()):
         break
     elif "@started" in task:
         active = re.sub(r" @started", '', task)
+        active = normalize(active)
         break
 
 if not active:
@@ -74,7 +81,8 @@ if start_time != None and end_time != None and end_time > start_time:
         tc = err_color
     start = active[:progress].replace("&", "&amp;")
     end = "" if reprogress <= 0 else active[-reprogress:].replace("&", "&amp;")
-    print("<span underline=\"single\" underline_color=\"" + undc + "\" foreground=\"" + tc + "\">" + start + "</span><span foreground=\"" + tc + "\">" + end + "</span>")
+    print("<span size=\"8500\" underline=\"single\" underline_color=\"" + undc + "\" foreground=\"" + tc + "\">" + start + "</span><span foreground=\"" + tc + "\">" + end + "</span>")
 
 else:
-    print("<span foreground=\"" + task_color + "\">" + active + "</span>")
+    full_task = "<span weight=\"bold\">" + parent_task + "</span>" + ": " + active if parent_task else active
+    print("<span size=\"8500\" foreground=\"" + task_color + "\">" + full_task + "</span>")

@@ -1,0 +1,83 @@
+#!/bin/sh
+
+# Setup OhMyZsh
+setopt appendhistory autocd extendedglob nomatch notify
+unsetopt beep
+export ZSH=[_HOME_]/Src/oh-my-zsh
+plugins=(git)
+ZSH_THEME="spaceship"
+SPACESHIP_PROMPT_ORDER=(
+  user
+  dir
+  host
+  git
+  package
+  node
+  golang
+  rust
+  docker
+  pyenv
+  exec_time
+
+  line_sep
+
+  jobs
+  exit_code
+  char
+)
+SPACESHIP_TIME_SHOW=false
+SPACESHIP_CHAR_SYMBOL="❯ "
+SPACESHIP_PROMPT_DEFAULT_PREFIX=" "
+SPACESHIP_DIR_TRUNC=3
+SPACESHIP_GIT_PREFIX=" "
+SPACESHIP_GIT_STATUS_COLOR=magenta
+SPACESHIP_GIT_STATUS_PREFIX=" "
+SPACESHIP_GIT_STATUS_SUFFIX=""
+SPACESHIP_PACKAGE_PREFIX=" "
+SPACESHIP_NODE_SYMBOL="JS: "
+SPACESHIP_RUST_SYMBOL="Rust: "
+SPACESHIP_PYENV_SYMBOL="Python: "
+SPACESHIP_GOLANG_SYMBOL="Go: "
+SPACESHIP_PACKAGE_SYMBOL=""
+source $ZSH/oh-my-zsh.sh
+
+# Setup pyenv
+# -----------
+eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
+
+# Aliases
+# -------
+alias sudo="sudo "
+alias copy="rsync -avph --progress"
+
+# ls
+# alias la="ls -ap--group-directories-first"
+# alias ll="ls -lhp --group-directories-first"
+# alias l="ls -lahp --group-directories-first"
+alias la="exa -a --group-directories-first"
+alias ll="exa -l --group-directories-first"
+alias l="exa -la --git --group-directories-first"
+alias lt="exa -la --git --group-directories-first --tree"
+
+# tree
+alias tre="tree -L"
+
+# git
+alias gch="git checkout"
+alias gbr="git branch"
+alias ga="git add"
+alias gs="git status"
+alias gl="git log --all --branches --remotes --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'"
+
+# nodejs / npm
+alias nr="npm run"
+alias js="node"
+
+# systemd
+alias sd="systemctl"
+
+# docker
+alias di="docker images"
+alias dc="docker container ls -a"
+

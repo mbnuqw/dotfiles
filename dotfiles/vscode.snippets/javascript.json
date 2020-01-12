@@ -1,8 +1,8 @@
 {
-	"Debug_logs": {
-		"prefix": "out",
+	"ConsoleLog": {
+		"prefix": "lg",
 		"body": [
-			"console.log('[DEBUG] $1');"
+			"console.log('[DEBUG] $1')"
 		],
 		"description": "Log output to console"
 	},

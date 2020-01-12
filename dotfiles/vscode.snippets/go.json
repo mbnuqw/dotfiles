@@ -24,7 +24,7 @@
 	"Log": {
 		"prefix": "out",
 		"body": [
-			"fmt.Println(\"[DEBUG] $0\")",
+			"fmt.Println(\" → $0\")",
 		],
 		"description": "Print out something"
 	},

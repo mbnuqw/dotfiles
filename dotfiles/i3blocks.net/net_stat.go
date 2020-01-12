@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"strconv"
-	"strings"
 	"time"
 
 	"github.com/shirou/gopsutil/net"
@@ -19,7 +18,7 @@ var mbColor = "#cccccc"
 const Interval = 1000
 
 // Interface name.
-const Interface = "wlp13s0b1"
+const Interface = "eno1"
 
 // MaxSpeed hm...
 const MaxSpeed = 2000000
@@ -80,18 +79,18 @@ func n() string {
 		tr += (float64(Interval) / 1000)
 	}
 
-	lss := ss
-	if ss > MaxSpeed {
-		lss = MaxSpeed
-	}
-	lsr := sr
-	if sr > MaxSpeed {
-		lsr = MaxSpeed
-	}
-	csBase := uint64(lss/MaxSpeed*float64(maxC-minC)) + minC
-	crBase := uint64(lsr/MaxSpeed*float64(maxC-minC)) + minC
-	cs := "#" + strings.Repeat(strconv.FormatUint(csBase, 16), 3)
-	cr := "#" + strings.Repeat(strconv.FormatUint(crBase, 16), 3)
+	// lss := ss
+	// if ss > MaxSpeed {
+	// 	lss = MaxSpeed
+	// }
+	// lsr := sr
+	// if sr > MaxSpeed {
+	// 	lsr = MaxSpeed
+	// }
+	// csBase := uint64(lss/MaxSpeed*float64(maxC-minC)) + minC
+	// crBase := uint64(lsr/MaxSpeed*float64(maxC-minC)) + minC
+	// cs := "#" + strings.Repeat(strconv.FormatUint(csBase, 16), 3)
+	// cr := "#" + strings.Repeat(strconv.FormatUint(crBase, 16), 3)
 
 	bytesSent = stat.BytesSent
 	bytesRecv = stat.BytesRecv
@@ -101,17 +100,19 @@ func n() string {
 	shortS, us := shortSize(ss)
 	shortR, ur := shortSize(sr)
 
-	return `<span face="Meslo LG S" size="7600" foreground="` + cs + `">` +
-		fmt.Sprintf("%3v", shortS) + us +
+	return `<span face="Meslo LG S" size="7600" foreground="#ffffff">` +
+		fmt.Sprintf("%4v", shortR) +
 		`</span>` +
-
-		`<span face="Font Awesome 5 Free" weight="normal" foreground="` + cs + `"> &#xf062;</span>` +
-
-		`<span face="Meslo LG S" size="7600" foreground="` + cr + `">` +
-		fmt.Sprintf("%4v", shortR) + ur +
+		`<span face="Font Awesome 5 Free" size="5000"> </span>` +
+		`<span face="Meslo LG S" size="8500" foreground="#aaaaaa">` + ur + `</span>` +
+		// `<span face="Font Awesome 5 Free" size="7000" weight="normal" foreground="#ffffff"> &#xf063;</span>` +
+		`<span face="Meslo LG S" size="7600" foreground="#ffffff">` +
+		fmt.Sprintf("%5v", shortS) +
 		`</span>` +
-
-		`<span face="Font Awesome 5 Free" weight="normal" foreground="` + cr + `"> &#xf063;</span>`
+		`<span face="Font Awesome 5 Free" size="5000"> </span>` +
+		`<span face="Meslo LG S" size="8500" foreground="#aaaaaa">` + us + `</span>`
+	// `<span face="Font Awesome 5 Free" size="7000" weight="normal" foreground="#ffffff"> &#xf062;</span>`
+	// `<span face="Font Awesome 5 Free" weight="normal" foreground="` + cr + `"> &#xf063;</span>`
 }
 
 func shortSize(bytes float64) (string, string) {

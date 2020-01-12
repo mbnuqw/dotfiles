@@ -110,6 +110,10 @@
   { "keys": ["ctrl+w"], "command": "close" },
   { "keys": ["ctrl+ц"], "command": "close" },
 
+  // Show files/menu popup
+  { "keys": ["ctrl+з"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": true} },
+  { "keys": ["ctrl+shift+з"], "command": "show_overlay", "args": {"overlay": "command_palette"} },
+
   //  SideBar
   // { "keys": ["ctrl+s", "ctrl+b"], "command": "toggle_side_bar" },
 
@@ -151,12 +155,17 @@
   // JsPrettier [plugin]
   // {"keys": ["ctrl+s", "ctrl+p"], "command": "js_prettier"},
 
-  { "keys": ["ctrl+shift+["], "command": "unfold" },
+  { "keys": ["ctrl+shift+["], "command": "fold" },
+  { "keys": ["ctrl+shift+]"], "command": "unfold" },
 
   { "keys": ["alt+;"], "command": "postfix" },
 
   { "keys": ["alt+q"], "command": "unbind" },
 
   // Typescript
-  { "keys": ["alt+t"], "command": "typescript_quick_info_doc", "context": [{ "key": "selector", "operator": "equal", "operand": "source.ts, source.tsx, text.html.vue" }]}
+  { "keys": ["alt+t"], "command": "typescript_quick_info_doc", "context": [{ "key": "selector", "operator": "equal", "operand": "source.ts, source.tsx, text.html.vue" }]},
+
+  { "keys": ["ctrl++"], "command": "increase_font_size" },
+  { "keys": ["ctrl+="], "command": "increase_font_size" },
+  { "keys": ["ctrl+-"], "command": "decrease_font_size" }
 ]

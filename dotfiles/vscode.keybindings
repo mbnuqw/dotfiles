@@ -213,5 +213,69 @@
   {
     "key": "ctrl+shift+x",
     "command": "-workbench.view.extensions"
+  },
+  {
+    "key": "alt+j",
+    "command": "findJump.activate"
+  },
+  {
+    "key": "ctrl+k ctrl+i",
+    "command": "editor.action.showHover"
+  },
+  {
+    "key": "ctrl+k ctrl+i",
+    "command": "-editor.action.showHover",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+b ctrl+d",
+    "command": "workbench.debug.action.focusBreakpointsView"
+  },
+  {
+    "key": "alt+space",
+    "command": "extension.jumpt"
+  },
+  {
+    "key": "alt+shift+space",
+    "command": "extension.jumpt",
+    "args": { "select": true }
+  },
+  {
+    "key": "alt+backspace",
+    "command": "extension.jumptback"
+  },
+  {
+    "key": "backspace backspace",
+    "command": "workbench.action.terminal.focusNextPane",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "alt+right",
+    "command": "-workbench.action.terminal.focusNextPane",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "alt+right",
+    "command": "workbench.action.navigateForward"
+  },
+  {
+    "key": "ctrl+shift+-",
+    "command": "-workbench.action.navigateForward"
+  },
+  {
+    "key": "alt+left",
+    "command": "workbench.action.navigateBack"
+  },
+  {
+    "key": "ctrl+alt+-",
+    "command": "-workbench.action.navigateBack"
+  },
+  {
+    "key": "alt+.",
+    "command": "workbench.action.focusNextGroup"
+  },
+  {
+    "key": "alt+,",
+    "command": "workbench.action.focusPreviousGroup"
   }
 ]

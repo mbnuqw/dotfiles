@@ -9,12 +9,12 @@ import (
 )
 
 var colorFg = "#313233"
-var colorNorm = "#969696"
+var colorNorm = "#ffffff"
 var colorWarn = "#E3CA3A"
 var colorShit = "#F03434"
 
 // Interval - I just want const.
-const Interval = 250
+const Interval = 500
 
 // CPULvl - cpu levels (2 core per symbol)
 var CPULvl = [...][5]string{
@@ -26,8 +26,8 @@ var CPULvl = [...][5]string{
 
 func main() {
 	for {
-		fmt.Println(`<span font_family="Iosevka" foreground="#969696">` +
-			`<span face="Font Awesome 5 Free" weight="normal">&#xf2db; </span>` +
+		fmt.Println(`<span font_family="Iosevka" foreground="#ffffff">` +
+			// `<span face="Font Awesome 5 Free" weight="normal">&#xf2db; </span>` +
 			p() +
 			`</span>`)
 		time.Sleep(Interval * time.Millisecond)

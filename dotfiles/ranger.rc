@@ -1,2 +1,13 @@
 set preview_images true
-set show_hidden true
+set show_hidden false
+set collapse_preview false
+
+# One of: size, natural, basename, atime, ctime, mtime, type, random
+set sort basename
+set sort_unicode true
+
+# Display the directory name in tabs?
+set dirname_in_tabs true
+
+# Save tabs on exit
+set save_tabs_on_exit true

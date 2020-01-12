@@ -9,7 +9,7 @@ import (
 )
 
 var colorFg = "#313233"
-var colorNorm = "#969696"
+var colorNorm = "#ffffff"
 var colorWarn = "#E3CA3A"
 var colorShit = "#F03434"
 
@@ -25,8 +25,8 @@ var MemLvl = [...]string{"⠀⠀",
 
 func main() {
 	for {
-		fmt.Println(`<span font_family="Iosevka" foreground="#969696">` +
-			`<span face="Font Awesome 5 Free" weight="normal">&#xf1c0; </span>` +
+		fmt.Println(`<span font_family="Iosevka">` +
+			// `<span face="Font Awesome 5 Free" weight="normal">&#xf1c0; </span>` +
 			m() +
 			`</span>`)
 		time.Sleep(Interval * time.Millisecond)

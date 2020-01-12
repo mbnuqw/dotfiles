@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
 
-
 # ------
 # Global config
 # ---
 
 # Font
-font pango:Noto Sans 9
+font pango:Noto Sans 11
 
 # use Mouse+Mod4 to drag floating windows to their wanted position
 floating_modifier Mod4
@@ -72,7 +71,7 @@ set $bracket_closed 35
 # ---
 
 # Dark
-set $bg "#313233"
+set $bg "#323232"
 set $fg "#fafafa"
 set $fg_ "#cacaca"
 set $fg__ "#969696"
@@ -111,15 +110,21 @@ bindcode Mod4+Shift+$key_t exec --no-startup-id FONTCONFIG_FILE=[_HOME_]/Apps/Te
 # Files
 bindcode Mod4+Shift+$key_r workspace 5: ; exec --no-startup-id [ $(ps h -C ranger | wc -l) = 0 ] && alacritty -e ranger
 
+# Passwords
+bindcode Mod4+Control+$key_p exec alacritty -t AlacrittyFloat -e sudo bat [_HOME_]/Secrets/passwords.md
+
 # Screenshots
 bindcode Mod4+$key_tild exec cd ~; exec scrot 'screenshot-%Y.%m.%d-%H.%M.%S.jpg' -q 98 -u
 bindcode Mod4+Mod1+$key_tild exec cd ~; exec scrot 'screenshot-%Y.%m.%d-%H.%M.%S.png' -u
 bindcode Mod4+Shift+$key_tild exec cd ~; exec scrot 'screenshot-%Y.%m.%d-%H.%M.%S.jpg' -q 98
+bindcode Mod4+Shift+Mod1+$key_tild exec cd ~; exec scrot 'screenshot-%Y.%m.%d-%H.%M.%S.png'
 # ffmpeg -f x11grab -video_size 1366x768 -framerate 30 -i :0.0+0,0 -c:v libx264 -preset ultrafast cast.mkv
 # ffmpeg -f x11grab -video_size 1680x1050 -framerate 30 -i :0.0+1366,0 -c:v libx264 -preset ultrafast cast.mkv
 
 # Start terminal
-bindsym Mod4+Return exec alacritty -e tmux
+bindsym Mod4+Return exec alacritty
+for_window [title="AlacrittyFloat"] floating enable
+bindsym Mod4+Control+Return exec alacritty -t AlacrittyFloat
 
 # Kill focused window
 bindcode Mod4+Shift+$key_w kill
@@ -127,7 +132,7 @@ bindcode Mod4+Shift+$key_w kill
 # Restart i3 / Logout / Sleep / Turn Off
 bindcode Mod4+$bcksp restart
 bindcode Mod4+Shift+$bcksp exit
-bindcode Mod4+Control+$bcksp exec --no-startup-id "systemctl suspend"
+bindcode Mod4+Control+$bcksp exec --no-startup-id "sleep 1 && systemctl suspend"
 bindcode Mod4+Control+Shift+$bcksp exec --no-startup-id "shutdown -h now"
 bindcode Mod4+Control+Mod1+$bcksp exec --no-startup-id "reboot"
 
@@ -142,10 +147,10 @@ bindsym Mod4+Up focus up
 bindsym Mod4+Right focus right
 
 # Move focused window
-bindsym Mod4+Shift+Left move left
-bindsym Mod4+Shift+Down move down
-bindsym Mod4+Shift+Up move up
-bindsym Mod4+Shift+Right move right
+bindsym Mod4+Shift+Left move left 32 px
+bindsym Mod4+Shift+Down move down 32 px
+bindsym Mod4+Shift+Up move up 32 px
+bindsym Mod4+Shift+Right move right 32 px
 
 # Fullscreen mode for the focused container
 bindcode Mod4+Shift+$enter fullscreen toggle
@@ -158,9 +163,11 @@ bindcode Mod4+$key_o split v
 bindcode Mod4+$eq layout stacking
 
 # Toggle tiling / floating
-bindsym --whole-window button10 floating toggle
-bindcode Mod4+$key_e floating toggle
+bindsym --whole-window button10 floating toggle; sticky enable
+bindcode Mod4+$key_e floating toggle; sticky enable
 bindcode Mod4+Shift+$key_e focus mode_toggle
+
+# for_window [floating] sticky enable
 
 # Focus the parent container
 bindcode Mod4+$key_q focus parent
@@ -170,7 +177,8 @@ bindsym Mod4+Shift+minus move scratchpad
 bindsym Mod4+minus scratchpad show
 
 # Resize mode
-bindcode Mod4+$key_r mode "resize"
+# bindcode Mod4+$key_r mode "resize"
+bindcode Mod4+$key_r exec "i3-msg gaps inner all set 24 && i3-msg mode 'resize'"
 
 # Bind workspaces to specific monitors
 workspace 1 output VGA1
@@ -191,43 +199,44 @@ workspace 14 output LVDS1
 
 # Switch to workspace
 bindcode Mod4+$key_h workspace 1: 
-bindcode Mod4+$key_j workspace 2: 
+bindcode Mod4+$key_j workspace 2: 
 bindcode Mod4+$key_k workspace 3: 
 bindcode Mod4+$key_l workspace 4: 
 bindcode Mod4+$key_col workspace 5: 
 bindcode Mod4+$key_n workspace 6: 
 bindcode Mod4+$key_m workspace 7: 
-bindcode Mod4+$key_com workspace 8: 
+bindcode Mod4+$key_com workspace 8: 
 
 bindcode Mod4+$key_a workspace 9: 
 bindcode Mod4+$key_s workspace 10: 
 bindcode Mod4+$key_d workspace 11: 
-bindcode Mod4+$key_f workspace 12: 
-bindcode Mod4+$key_z workspace 13: 
-bindcode Mod4+$key_x workspace 14: 
+bindcode Mod4+$key_f workspace 12: 
+bindcode Mod4+$key_z workspace 13: 
+bindcode Mod4+$key_x workspace 14: 
 
 # Move focused container to workspace
 bindcode Mod4+Shift+$key_h move container to workspace 1: ; workspace 1: 
-bindcode Mod4+Shift+$key_j move container to workspace 2: ; workspace 2: 
+bindcode Mod4+Shift+$key_j move container to workspace 2: ; workspace 2: 
 bindcode Mod4+Shift+$key_k move container to workspace 3: ; workspace 3: 
 bindcode Mod4+Shift+$key_l move container to workspace 4: ; workspace 4: 
 bindcode Mod4+Shift+$key_col move container to workspace 5: ; workspace 5: 
 bindcode Mod4+Shift+$key_n move container to workspace 6: ; workspace 6: 
 bindcode Mod4+Shift+$key_m move container to workspace 7: ; workspace 7: 
-bindcode Mod4+Shift+$key_com move container to workspace 8: ; workspace 8: 
+bindcode Mod4+Shift+$key_com move container to workspace 8: ; workspace 8: 
 
 bindcode Mod4+Shift+$key_a move container to workspace 9: ; workspace 9: 
 bindcode Mod4+Shift+$key_s move container to workspace 10: ; workspace 10: 
 bindcode Mod4+Shift+$key_d move container to workspace 11: ; workspace 11: 
-bindcode Mod4+Shift+$key_f move container to workspace 12: ; workspace 11: 
-bindcode Mod4+Shift+$key_z move container to workspace 13: ; workspace 13: 
-bindcode Mod4+Shift+$key_x move container to workspace 14: ; workspace 14: 
+bindcode Mod4+Shift+$key_f move container to workspace 12: ; workspace 12: 
+bindcode Mod4+Shift+$key_z move container to workspace 13: ; workspace 13: 
+bindcode Mod4+Shift+$key_x move container to workspace 14: ; workspace 14: 
 
 # Apps assignments
-assign [class="(?i)firefox"] "1: "
-assign [class="(?i)qbittorrent"] "1: "
-for_window [class="(?i)qbittorrent"] focus
-assign [class="(?i)subl"] "2: "
+assign [class="^Firefox$"] "1: "
+assign [class="^qBittorrent$"] "13: "
+for_window [class="^qBittorrent$"] focus
+assign [class="^Firefox (Nightly|Beta)$"] "10: "
+assign [class="(?i)subl"] "2: "
 for_window [class="(?i)subl"] focus
 assign [class="(?i)code"] "3: "
 assign [class="(?i)mpv"] "6: "
@@ -238,15 +247,19 @@ assign [class="(?i)evince"] "6: "
 for_window [class="(?i)evince"] focus
 assign [class="(?i)deadbeef"] "6: "
 for_window [class="(?i)qemu" title="(?i)windows10"] move to workspace "7: "
-for_window [class="(?i)qemu" title="(?i)macos"] move to workspace "8: "
+for_window [class="(?i)qemu" title="(?i)macos"] move to workspace "8: "
 
-assign [class="(?i)chrome"] "10: "
+# assign [class="(?i)chrome"] "10: "
+for_window [class="(?i)chrome"] floating enable
 assign [class="(?i)arida"] "10: "
 assign [class="(?i)telegram"] "11: "
-for_window [class=".*"] title_format " %title"
+
 
 # Show titles
 # for_window [class=".*"] border normal 0
+for_window [class=".*"] title_format "<span size='9600'>  %title</span>"
+for_window [class="Firefox"] title_format "<span size='9600'>  %title</span>"
+for_window [class="Alacritty"] title_format "<span size='9600'>  %title</span>"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -261,52 +274,53 @@ mode "resize" {
     bindsym Shift+Right resize grow width 5 px or 1 ppt
 
     # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+    bindsym Return exec "i3-msg mode 'default' && i3-msg gaps inner all set 12"
+    bindsym Escape exec "i3-msg mode 'default' && i3-msg gaps inner all set 12"
 }
 
 gaps inner 12
-smart_gaps on
+# smart_gaps on
+
+# Border
+for_window [class=".*"] border pixel 2
 
 focus_on_window_activation none
 
 # hide_edge_borders both
 new_window none
-client.focused $bg $bg $act_fg $bg $bg
-client.focused_inactive $bg $bg $fg $bg $bg
-client.unfocused $bg $bg $fg__ $bg $bg
+client.focused #484848 #484848 #ffffff #484848 #484848
+client.focused_inactive #323232 $bg $fg #242424 #242424
+client.unfocused #323232 $bg $fg__ #242424 #242424
 client.urgent $bg $bg $urg_fg $bg $bg
 client.placeholder $bg $bg $fg__ $bg $bg
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    i3bar_command i3bar
+    i3bar_command i3bar -t
     status_command i3blocks
     position top
     separator_symbol " "
     tray_padding 4
     strip_workspace_numbers yes
+    strip_workspace_name no
 
     colors {
-       background $bg
-       focused_workspace $bg $bg $act_fg
-       active_workspace $bg $bg $fg_
-       inactive_workspace $bg $bg $fg__
-       urgent_workspace $bg $bg $urg_fg
+       background #00000000
+       focused_workspace #00000000 #00000000 #ffaa22
+       active_workspace #00000000 #00000000 #ffffff
+       inactive_workspace #00000000 #00000000 #aaaaaa
+       urgent_workspace #00000000 #00000000 $urg_fg
     }
 
-    font pango:Noto Sans, Font Awesome 5 Free 9
+    font pango:Noto Sans, Font Awesome 5 Free 12px
 }
 
 
 # Run bg apps and other stuff
-# exec --no-startup-id gnome-settings-daemon
-exec --no-startup-id feh --bg-fill [_HOME_]/.config/images/bg.jpg --bg-fill [_HOME_]/.config/images/wp6-n.jpg
+exec --no-startup-id feh --bg-fill [_HOME_]/Media/images/dark-winter-forest-wallpapers-22.jpg --bg-fill [_HOME_]/Media/images/vmbj9rwhbf341.jpg
 # feh --bg-scale --no-xinerama /path/img.png - one image on two screens
-# exec --no-startup-id nm-applet
-# exec --no-startup-id yandex-disk-indicator
-exec --no-startup-id FONTCONFIG_FILE=[_HOME_]/Apps/Telegram/fontfix telegram -startintray -- %u
+exec --no-startup-id telegram -startintray -- %u
 
 exec_always --no-startup-id xset r rate 250 32
 exec_always --no-startup-id xrandr --output LVDS1 --brightness 0.78
@@ -318,9 +332,9 @@ exec --no-startup-id compton -b
 
 # Restore workspaces
 exec --no-startup-id i3-msg "workspace 9: ; append_layout [_HOME_]/.config/i3/workspace-alacritty.json"
-exec --no-startup-id alacritty -e tmux
+exec --no-startup-id alacritty
 
-exec --no-startup-id i3-msg "workspace 2: ; append_layout [_HOME_]/.config/i3/workspace-subl.json"
+exec --no-startup-id i3-msg "workspace 2: ; append_layout [_HOME_]/.config/i3/workspace-subl.json"
 exec --no-startup-id subl
 
 exec --no-startup-id i3-msg "workspace 1: ; append_layout [_HOME_]/.config/i3/workspace-firefox.json"
